@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ChinaCraft</title>
+    <link rel="stylesheet" href="/ChinaCraft2/styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content container">
+            <div class="logo">
+                <a href="/ChinaCraft2/">
+                    <img src="/ChinaCraft2/images/logo.svg" alt="ChinaCraft" class="logo-image">
+                    <span class="logo-text">ChinaCraft</span>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/ChinaCraft2/">Home</a></li>
+                    <li><a href="/ChinaCraft2/forum">Forum</a></li>
+                    <li><a href="/ChinaCraft2/about">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="auth-section container">
+            <div class="auth-card">
+                <h1>Welcome Back</h1>
+                <p class="auth-description">Sign in to join discussions and access all features</p>
+                
+                <div class="auth-options">
+                    <button onclick="login()" class="btn btn-primary btn-large auth-button">
+                        <img src="/images/google-icon.svg" alt="Google" class="auth-icon">
+                        Sign in with Google
+                    </button>
+                    <button onclick="login()" class="btn btn-secondary btn-large auth-button">
+                        <img src="/images/github-icon.svg" alt="GitHub" class="auth-icon">
+                        Sign in with GitHub
+                    </button>
+                </div>
+
+                <div class="auth-divider">
+                    <span>or</span>
+                </div>
+
+                <div class="guest-access">
+                    <p>Continue as guest to browse content</p>
+                    <a href="index.html" class="btn btn-secondary">Browse as Guest</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 ChinaCraft. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        let auth0Client = null;
+
+        const configureClient = async () => {
+            auth0Client = await createAuth0Client({
+                domain: 'YOUR_AUTH0_DOMAIN',
+                client_id: 'YOUR_AUTH0_CLIENT_ID',
+                redirect_uri: window.location.origin
+            });
+        };
+
+        const login = async () => {
+            try {
+                await auth0Client.loginWithRedirect({
+                    redirect_uri: window.location.origin
+                });
+            } catch (err) {
+                console.log('Log in failed', err);
+            }
+        };
+
+        const checkAuth = async () => {
+            try {
+                const isAuthenticated = await auth0Client.isAuthenticated();
+                if (isAuthenticated) {
+                    window.location.href = 'index.html';
+                }
+            } catch (err) {
+                console.log('Error checking authentication', err);
+            }
+        };
+
+        window.onload = async () => {
+            await configureClient();
+            await checkAuth();
+        };
+    </script>
+</body>
+</html> 
