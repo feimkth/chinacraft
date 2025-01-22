@@ -8,7 +8,10 @@
     ],
     "routes": [
         {
-            "src": "/trending-words/(.*)",
+            "handle": "filesystem"
+        },
+        {
+            "src": "/trending-words/([^/]+)",
             "dest": "/trending-words/$1.html"
         },
         {
