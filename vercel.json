@@ -8,6 +8,13 @@
     ],
     "routes": [
         {
+            "handle": "filesystem"
+        },
+        {
+            "src": "/trending-words/(.*)",
+            "dest": "/trending-words/$1.html"
+        },
+        {
             "src": "/(.*)",
             "dest": "/$1.html"
         }
