@@ -7,10 +7,25 @@
         }
     ],
     "routes": [
-        { "handle": "filesystem" },
-        { 
-            "src": "/",
-            "dest": "/index.html"
+        {
+            "src": "/styles/(.*)",
+            "dest": "/styles/$1"
+        },
+        {
+            "src": "/images/(.*)",
+            "dest": "/images/$1"
+        },
+        {
+            "src": "/trending-words/(.*)",
+            "dest": "/trending-words/$1"
+        },
+        {
+            "src": "/(.*).html",
+            "dest": "/$1.html"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/$1.html"
         }
     ]
 } 
