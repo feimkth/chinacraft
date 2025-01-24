@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCDSDPN912"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JCDSDPN912', {
+            'page_path': window.location.pathname
+        });
+
+        // Track navigation clicks
+        function trackNavigation(section) {
+            gtag('event', 'navigation_click', {
+                'section': section
+            });
+        }
+
+        // Track button clicks
+        function trackButton(action) {
+            gtag('event', 'button_click', {
+                'action': action
+            });
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - ChinaCraft</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content container">
+            <div class="logo">
+                <a href="/">
+                    <img src="/images/logo.svg" alt="ChinaCraft" class="logo-image">
+                    <span class="logo-text">ChinaCraft</span>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/" onclick="trackNavigation('home')">Home</a></li>
+                    <li><a href="/forum" onclick="trackNavigation('forum')">Forum</a></li>
+                    <li><a href="/about" class="active" onclick="trackNavigation('about')">About Us</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="/login" class="btn btn-secondary" onclick="trackButton('login')">Log In</a>
+                <a href="/login" class="btn btn-primary" onclick="trackButton('signup')">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="about-page">
+        <div class="container">
+            <section class="about-content">
+                <h1>About Us</h1>
+                <p class="about-description">This site is built for ALL who are interested in Chinese language, culture and travel. Your feedback helps us improve the community experience.</p>
+                
+                <div class="google-form-container">
+                    <iframe 
+                        src="https://docs.google.com/forms/d/17LjaPWbs9O1XyRwsqVwkf2gEoIJxFedlT9IQT7k_fK8/viewform?embedded=true"
+                        width="100%" 
+                        height="400" 
+                        frameborder="0" 
+                        marginheight="0" 
+                        marginwidth="0">
+                        Loading...
+                    </iframe>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2024 ChinaCraft. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 

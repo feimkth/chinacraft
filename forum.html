@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCDSDPN912"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JCDSDPN912', {
+            'page_path': window.location.pathname
+        });
+
+        // Track navigation clicks
+        function trackNavigation(section) {
+            gtag('event', 'navigation_click', {
+                'section': section
+            });
+        }
+
+        // Track button clicks
+        function trackButton(action) {
+            gtag('event', 'button_click', {
+                'action': action
+            });
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum - ChinaCraft</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content container">
+            <div class="logo">
+                <a href="/">
+                    <img src="/images/logo.svg" alt="ChinaCraft" class="logo-image">
+                    <span class="logo-text">ChinaCraft</span>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/" onclick="trackNavigation('home')">Home</a></li>
+                    <li><a href="/forum" class="active" onclick="trackNavigation('forum')">Forum</a></li>
+                    <li><a href="/about" onclick="trackNavigation('about')">About Us</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="/login" class="btn btn-secondary" onclick="trackButton('login')">Log In</a>
+                <a href="/login" class="btn btn-primary" onclick="trackButton('signup')">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="forum-hero">
+            <div class="container">
+                <h1>Community Forum</h1>
+                <p>Join the discussion and connect with fellow Chinese language and culture enthusiasts</p>
+            </div>
+        </section>
+
+        <section class="forum-categories container">
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">🈺</div>
+                    <h2>Chinese Language</h2>
+                    <ul class="subcategories">
+                        <li>
+                            <a href="#">Grammar & Writing
+                                <span class="meta">125 topics • 1.2k posts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">Speaking & Pronunciation
+                                <span class="meta">98 topics • 876 posts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">Learning Resources
+                                <span class="meta">67 topics • 543 posts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">HSK Preparation
+                                <span class="meta">89 topics • 934 posts</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🗺️</div>
+                    <h2>Travel in China</h2>
+                    <ul class="subcategories">
+                        <li>
+                            <a href="#">City Guides
+                                <span class="meta">156 topics • 1.5k posts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">Travel Tips & Advice
+                                <span class="meta">112 topics • 987 posts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">Food & Dining
+                                <span class="meta">145 topics • 1.3k posts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">Transportation
+                                <span class="meta">78 topics • 654 posts</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="category-card">
+                    <div class="category-icon">🏮</div>
+                    <h2>Chinese Culture</h2>
+                    <ul class="subcategories">
+                        <li>
+                            <a href="#">Traditions & Customs
+                                <span class="meta">134 topics • 1.1k posts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">Arts & Literature
+                                <span class="meta">92 topics • 876 posts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">Modern China
+                                <span class="meta">167 topics • 1.4k posts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">Festivals & Celebrations
+                                <span class="meta">88 topics • 923 posts</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="forum-activity container">
+            <div class="activity-header">
+                <h2>Recent Activity</h2>
+                <a href="#" class="btn btn-secondary">View All</a>
+            </div>
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-avatar">
+                        <img src="images/avatars/default.svg" alt="User Avatar">
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-meta">
+                            <a href="#" class="username">LinLin</a>
+                            <span class="timestamp">5 minutes ago</span>
+                        </div>
+                        <p>Posted in <a href="#">HSK Preparation</a>: "Tips for passing HSK 4 listening section"</p>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-avatar">
+                        <img src="images/avatars/default.svg" alt="User Avatar">
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-meta">
+                            <a href="#" class="username">TravelMaster</a>
+                            <span class="timestamp">23 minutes ago</span>
+                        </div>
+                        <p>Replied in <a href="#">City Guides</a>: "Hidden gems in Chengdu"</p>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-avatar">
+                        <img src="images/avatars/default.svg" alt="User Avatar">
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-meta">
+                            <a href="#" class="username">CultureFan</a>
+                            <span class="timestamp">1 hour ago</span>
+                        </div>
+                        <p>Started a new topic in <a href="#">Arts & Literature</a>: "Contemporary Chinese poetry recommendations"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 ChinaCraft. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html> 
