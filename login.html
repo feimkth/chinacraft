@@ -6,7 +6,6 @@
     <title>Login - ChinaCraft</title>
     <link rel="stylesheet" href="/styles/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCDSDPN912"></script>
     <script>
@@ -50,6 +49,15 @@
                     <li><a href="/about" onclick="trackNavigation('about')">About Us</a></li>
                 </ul>
             </nav>
+            <div class="auth-buttons">
+                <div class="user-info" style="display: none;">
+                    <span class="welcome-text">Welcome, <span class="user-name"></span></span>
+                    <button onclick="handleSignOut()" class="btn btn-secondary">Sign Out</button>
+                </div>
+                <div class="login-buttons">
+                    <a href="/login" class="btn btn-secondary" onclick="trackButton('login')">Log In</a>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -77,11 +85,6 @@
                          data-size="large"
                          data-logo_alignment="left">
                     </div>
-
-                    <button onclick="trackLogin('github'); login()" class="btn btn-secondary btn-large auth-button">
-                        <img src="/images/github-icon.svg" alt="GitHub" class="auth-icon">
-                        Sign in with GitHub
-                    </button>
                 </div>
 
                 <div class="auth-divider">
@@ -103,41 +106,34 @@
     </footer>
 
     <script>
-        let auth0Client = null;
-
-        const configureClient = async () => {
-            auth0Client = await createAuth0Client({
-                domain: 'YOUR_AUTH0_DOMAIN',
-                client_id: 'YOUR_AUTH0_CLIENT_ID',
-                redirect_uri: window.location.origin
-            });
+        // Check if user is logged in on page load
+        window.onload = function() {
+            checkUserLogin();
         };
 
-        const login = async () => {
-            try {
-                await auth0Client.loginWithRedirect({
-                    redirect_uri: window.location.origin
-                });
-            } catch (err) {
-                console.log('Log in failed', err);
+        function checkUserLogin() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user) {
+                showUserInfo(user);
             }
-        };
+        }
 
-        const checkAuth = async () => {
-            try {
-                const isAuthenticated = await auth0Client.isAuthenticated();
-                if (isAuthenticated) {
-                    window.location.href = 'index.html';
-                }
-            } catch (err) {
-                console.log('Error checking authentication', err);
+        function showUserInfo(user) {
+            const userInfo = document.querySelector('.user-info');
+            const loginButtons = document.querySelector('.login-buttons');
+            const userName = document.querySelector('.user-name');
+            
+            if (userInfo && loginButtons && userName) {
+                userName.textContent = user.name;
+                userInfo.style.display = 'flex';
+                loginButtons.style.display = 'none';
             }
-        };
+        }
 
-        window.onload = async () => {
-            await configureClient();
-            await checkAuth();
-        };
+        function handleSignOut() {
+            localStorage.removeItem('user');
+            window.location.href = '/';
+        }
 
         function handleGoogleSignIn(response) {
             // Decode the JWT token
@@ -156,12 +152,16 @@
             });
 
             // Store user info in localStorage
-            localStorage.setItem('user', JSON.stringify({
+            const user = {
                 id: responsePayload.sub,
                 name: responsePayload.name,
                 email: responsePayload.email,
                 picture: responsePayload.picture
-            }));
+            };
+            localStorage.setItem('user', JSON.stringify(user));
+
+            // Show success message
+            alert('Successfully signed in! Welcome ' + responsePayload.name);
 
             // Redirect to home page
             window.location.href = '/';
