@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - ChinaCraft</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
     <!-- Google tag (gtag.js) -->
@@ -13,7 +13,9 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-JCDSDPN912');
+        gtag('config', 'G-JCDSDPN912', {
+            'page_path': window.location.pathname
+        });
 
         // Track navigation clicks
         function trackNavigation(section) {
@@ -29,21 +31,23 @@
             });
         }
     </script>
+    <!-- Google Sign-In API -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
     <header class="main-header">
         <div class="header-content container">
             <div class="logo">
-                <a href="index.html">
-                    <img src="images/logo.svg" alt="ChinaCraft" class="logo-image">
+                <a href="/">
+                    <img src="/images/logo.svg" alt="ChinaCraft" class="logo-image">
                     <span class="logo-text">ChinaCraft</span>
                 </a>
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="index.html" onclick="trackNavigation('home')">Home</a></li>
-                    <li><a href="forum.html" onclick="trackNavigation('forum')">Forum</a></li>
-                    <li><a href="about.html" onclick="trackNavigation('about')">About Us</a></li>
+                    <li><a href="/" onclick="trackNavigation('home')">Home</a></li>
+                    <li><a href="/forum" onclick="trackNavigation('forum')">Forum</a></li>
+                    <li><a href="/about" onclick="trackNavigation('about')">About Us</a></li>
                 </ul>
             </nav>
         </div>
@@ -56,10 +60,24 @@
                 <p class="auth-description">Sign in to join discussions and access all features</p>
                 
                 <div class="auth-options">
-                    <button onclick="trackLogin('google'); login()" class="btn btn-primary btn-large auth-button">
-                        <img src="/images/google-icon.svg" alt="Google" class="auth-icon">
-                        Sign in with Google
-                    </button>
+                    <!-- Google Sign-In button -->
+                    <div id="g_id_onload"
+                         data-client_id="258958060994-kd7ubs7ovl87ueo7uc4po2ncr4g5dph8.apps.googleusercontent.com"
+                         data-context="signin"
+                         data-ux_mode="popup"
+                         data-callback="handleGoogleSignIn"
+                         data-auto_prompt="false">
+                    </div>
+
+                    <div class="g_id_signin"
+                         data-type="standard"
+                         data-shape="rectangular"
+                         data-theme="outline"
+                         data-text="signin_with"
+                         data-size="large"
+                         data-logo_alignment="left">
+                    </div>
+
                     <button onclick="trackLogin('github'); login()" class="btn btn-secondary btn-large auth-button">
                         <img src="/images/github-icon.svg" alt="GitHub" class="auth-icon">
                         Sign in with GitHub
@@ -120,6 +138,43 @@
             await configureClient();
             await checkAuth();
         };
+
+        function handleGoogleSignIn(response) {
+            // Decode the JWT token
+            const responsePayload = decodeJwtResponse(response.credential);
+            
+            console.log("ID: " + responsePayload.sub);
+            console.log('Full Name: ' + responsePayload.name);
+            console.log('Given Name: ' + responsePayload.given_name);
+            console.log('Family Name: ' + responsePayload.family_name);
+            console.log("Image URL: " + responsePayload.picture);
+            console.log("Email: " + responsePayload.email);
+
+            // Track successful login
+            gtag('event', 'login_success', {
+                'method': 'google'
+            });
+
+            // Store user info in localStorage
+            localStorage.setItem('user', JSON.stringify({
+                id: responsePayload.sub,
+                name: responsePayload.name,
+                email: responsePayload.email,
+                picture: responsePayload.picture
+            }));
+
+            // Redirect to home page
+            window.location.href = '/';
+        }
+
+        function decodeJwtResponse(token) {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        }
     </script>
 </body>
 </html> 
