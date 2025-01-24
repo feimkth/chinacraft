@@ -1,31 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCDSDPN912"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JCDSDPN912', {
+            'page_path': window.location.pathname
+        });
+
+        // Track trending word clicks
+        function trackTrendingWord(word) {
+            gtag('event', 'trending_word_click', {
+                'word': word
+            });
+        }
+
+        // Track navigation clicks
+        function trackNavigation(section) {
+            gtag('event', 'navigation_click', {
+                'section': section
+            });
+        }
+
+        // Track button clicks
+        function trackButton(action) {
+            gtag('event', 'button_click', {
+                'action': action
+            });
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChinaCraft - Language & Culture Community</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="main-header">
         <div class="header-content container">
             <div class="logo">
-                <a href="index.html">
-                    <img src="images/logo.svg" alt="ChinaCraft" class="logo-image">
+                <a href="/">
+                    <img src="/images/logo.svg" alt="ChinaCraft" class="logo-image">
                     <span class="logo-text">ChinaCraft</span>
                 </a>
             </div>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="forum.html">Forum</a></li>
-                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="/" class="active" onclick="trackNavigation('home')">Home</a></li>
+                    <li><a href="/forum" onclick="trackNavigation('forum')">Forum</a></li>
+                    <li><a href="/about" onclick="trackNavigation('about')">About Us</a></li>
                 </ul>
             </nav>
             <div class="auth-buttons">
-                <a href="login.html" class="btn btn-secondary">Log In</a>
-                <a href="login.html" class="btn btn-primary">Sign Up</a>
+                <div class="user-info" style="display: none;">
+                    <span class="welcome-text">Welcome, <span class="user-name"></span></span>
+                    <button onclick="handleSignOut()" class="btn btn-secondary">Sign Out</button>
+                </div>
+                <div class="login-buttons">
+                    <a href="/login" class="btn btn-secondary" onclick="trackButton('login')">Log In</a>
+                    <a href="/login" class="btn btn-primary" onclick="trackButton('signup')">Sign Up</a>
+                </div>
             </div>
         </div>
     </header>
@@ -70,43 +107,43 @@
                 <p class="update-date">Updated: January 22, 2025</p>
                 <ul class="trending-list">
                     <li>
-                        <a href="/trending-words/shu-zhi-hua">数智化 (Shù zhì huà)</a>
+                        <a href="/trending-words/shu-zhi-hua" onclick="trackTrendingWord('数智化')">数智化 (Shù zhì huà)</a>
                         <span class="meta">Digital Intelligence</span>
                     </li>
                     <li>
-                        <a href="/trending-words/zhi-neng-xiang-shan">智能向善 (Zhì néng xiàng shàn)</a>
+                        <a href="/trending-words/zhi-neng-xiang-shan" onclick="trackTrendingWord('智能向善')">智能向善 (Zhì néng xiàng shàn)</a>
                         <span class="meta">AI for Good</span>
                     </li>
                     <li>
-                        <a href="/trending-words/wei-lai-chan-ye">未来产业 (Wèi lái chǎn yè)</a>
+                        <a href="/trending-words/wei-lai-chan-ye" onclick="trackTrendingWord('未来产业')">未来产业 (Wèi lái chǎn yè)</a>
                         <span class="meta">Future Industries</span>
                     </li>
                     <li>
-                        <a href="/trending-words/city-bu-city">city不city (city bù city)</a>
+                        <a href="/trending-words/city-bu-city" onclick="trackTrendingWord('city不city')">city不city (city bù city)</a>
                         <span class="meta">City or Not</span>
                     </li>
                     <li>
-                        <a href="/trending-words/ying-kong">硬控 (Yìng kòng)</a>
+                        <a href="/trending-words/ying-kong" onclick="trackTrendingWord('硬控')">硬控 (Yìng kòng)</a>
                         <span class="meta">Hard Control</span>
                     </li>
                     <li>
-                        <a href="/trending-words/shui-ling-ling-de">水灵灵地 (Shuǐ líng líng de)</a>
+                        <a href="/trending-words/shui-ling-ling-de" onclick="trackTrendingWord('水灵灵地')">水灵灵地 (Shuǐ líng líng de)</a>
                         <span class="meta">Fresh and Lively</span>
                     </li>
                     <li>
-                        <a href="/trending-words/ban-wei">班味 (Bān wèi)</a>
+                        <a href="/trending-words/ban-wei" onclick="trackTrendingWord('班味')">班味 (Bān wèi)</a>
                         <span class="meta">Office Fatigue</span>
                     </li>
                     <li>
-                        <a href="/trending-words/song-chi-gan">松弛感 (Sōng chí gǎn)</a>
+                        <a href="/trending-words/song-chi-gan" onclick="trackTrendingWord('松弛感')">松弛感 (Sōng chí gǎn)</a>
                         <span class="meta">Relaxed Feeling</span>
                     </li>
                     <li>
-                        <a href="/trending-words/yin-fa-li-liang">银发力量 (Yín fà lì liàng)</a>
+                        <a href="/trending-words/yin-fa-li-liang" onclick="trackTrendingWord('银发力量')">银发力量 (Yín fà lì liàng)</a>
                         <span class="meta">Silver Power</span>
                     </li>
                     <li>
-                        <a href="/trending-words/xiao-hai-ge-jie">小孩哥/小孩姐 (Xiǎo hái gē / xiǎo hái jiě)</a>
+                        <a href="/trending-words/xiao-hai-ge-jie" onclick="trackTrendingWord('小孩哥/小孩姐')">小孩哥/小孩姐 (Xiǎo hái gē / xiǎo hái jiě)</a>
                         <span class="meta">Child Prodigy</span>
                     </li>
                 </ul>
@@ -120,8 +157,8 @@
             <div class="hero-content container">
                 <h1>Explore Chinese Language and Culture with a Thriving Community</h1>
                 <div class="cta-buttons">
-                    <button class="btn btn-primary btn-large">Join the Community</button>
-                    <button class="btn btn-secondary btn-large">Learn More</button>
+                    <button class="btn btn-primary btn-large" onclick="trackButton('join_community')">Join the Community</button>
+                    <button class="btn btn-secondary btn-large" onclick="trackButton('learn_more')">Learn More</button>
                 </div>
             </div>
         </section>
@@ -178,5 +215,36 @@
             <p>&copy; 2025 ChinaCraft. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Check if user is logged in on page load
+        window.onload = function() {
+            checkUserLogin();
+        };
+
+        function checkUserLogin() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user) {
+                showUserInfo(user);
+            }
+        }
+
+        function showUserInfo(user) {
+            const userInfo = document.querySelector('.user-info');
+            const loginButtons = document.querySelector('.login-buttons');
+            const userName = document.querySelector('.user-name');
+            
+            if (userInfo && loginButtons && userName) {
+                userName.textContent = user.name;
+                userInfo.style.display = 'flex';
+                loginButtons.style.display = 'none';
+            }
+        }
+
+        function handleSignOut() {
+            localStorage.removeItem('user');
+            window.location.reload();
+        }
+    </script>
 </body>
 </html> 
