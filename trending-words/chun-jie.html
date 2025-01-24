@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JCDSDPN912"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JCDSDPN912', {
+            'page_path': window.location.pathname
+        });
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>春节 (Spring Festival) - ChinaCraft</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content container">
+            <div class="logo">
+                <a href="/">
+                    <img src="/images/logo.svg" alt="ChinaCraft" class="logo-image">
+                    <span class="logo-text">ChinaCraft</span>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/" onclick="trackNavigation('home')">Home</a></li>
+                    <li><a href="/forum" onclick="trackNavigation('forum')">Forum</a></li>
+                    <li><a href="/about" onclick="trackNavigation('about')">About Us</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <div class="user-info" style="display: none;">
+                    <span class="welcome-text">Welcome, <span class="user-name"></span></span>
+                    <button onclick="handleSignOut()" class="btn btn-secondary">Sign Out</button>
+                </div>
+                <div class="login-buttons">
+                    <a href="/login" class="btn btn-secondary" onclick="trackButton('login')">Log In</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="word-details container">
+            <div class="word-card">
+                <div class="word-header">
+                    <h1 class="chinese-word">春节</h1>
+                    <p class="pinyin">Chūn jié</p>
+                    <p class="english-meaning">Spring Festival</p>
+                </div>
+                <div class="word-meaning">
+                    <h3>Meaning:</h3>
+                    <p>The most important traditional holiday in China, celebrating the Lunar New Year. It marks the beginning of the lunar calendar and is a time for family reunions, feasting, and various cultural traditions.</p>
+                </div>
+                <div class="word-context">
+                    <h3>Cultural Context:</h3>
+                    <p>Traditions include giving red envelopes (红包 hóng bāo), decorating with red couplets, enjoying a reunion dinner (年夜饭 nián yè fàn), and setting off firecrackers to ward off evil spirits.</p>
+                </div>
+                <div class="word-example">
+                    <h3>Common Phrases:</h3>
+                    <ul>
+                        <li>
+                            <p class="chinese">新年快乐 (xīn nián kuài lè)</p>
+                            <p class="english">Happy New Year!</p>
+                        </li>
+                        <li>
+                            <p class="chinese">恭喜发财 (gōng xǐ fā cái)</p>
+                            <p class="english">Wishing you prosperity!</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="word-navigation">
+                    <a href="/#trending" class="btn btn-primary">← Back to Trending</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 ChinaCraft. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Check if user is logged in on page load
+        window.onload = function() {
+            checkUserLogin();
+        };
+
+        function checkUserLogin() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user) {
+                showUserInfo(user);
+            }
+        }
+
+        function showUserInfo(user) {
+            const userInfo = document.querySelector('.user-info');
+            const loginButtons = document.querySelector('.login-buttons');
+            const userName = document.querySelector('.user-name');
+            
+            if (userInfo && loginButtons && userName) {
+                userName.textContent = user.name;
+                userInfo.style.display = 'flex';
+                loginButtons.style.display = 'none';
+            }
+        }
+
+        function handleSignOut() {
+            localStorage.removeItem('user');
+            window.location.reload();
+        }
+    </script>
+</body>
+</html> 
