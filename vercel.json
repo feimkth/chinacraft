@@ -15,6 +15,14 @@
             "dest": "/trending-words/$1.html"
         },
         {
+            "src": "/forum",
+            "dest": "/forum.html"
+        },
+        {
+            "src": "/about",
+            "dest": "/about.html"
+        },
+        {
             "src": "/(.*)",
             "dest": "/$1"
         }
