@@ -8,37 +8,68 @@
     ],
     "routes": [
         {
+            "src": "/",
+            "dest": "/index.html",
+            "headers": {
+                "cache-control": "no-cache, no-store, must-revalidate",
+                "pragma": "no-cache",
+                "expires": "0",
+                "x-frame-options": "DENY",
+                "x-content-type-options": "nosniff"
+            }
+        },
+        {
             "src": "/trending-words/chun-jie",
-            "dest": "/trending-words/chun-jie.html"
+            "dest": "/trending-words/chun-jie.html",
+            "headers": {
+                "cache-control": "no-cache, no-store, must-revalidate",
+                "pragma": "no-cache",
+                "expires": "0"
+            }
         },
         {
             "src": "/trending-words/chun-yun",
-            "dest": "/trending-words/chun-yun.html"
+            "dest": "/trending-words/chun-yun.html",
+            "headers": {
+                "cache-control": "no-cache, no-store, must-revalidate",
+                "pragma": "no-cache",
+                "expires": "0"
+            }
         },
         {
             "src": "/trending-words/(.*)",
-            "dest": "/trending-words/$1.html"
+            "dest": "/trending-words/$1.html",
+            "headers": {
+                "cache-control": "no-cache, no-store, must-revalidate",
+                "pragma": "no-cache",
+                "expires": "0"
+            }
         },
         {
-            "src": "/forum",
-            "dest": "/forum.html"
-        },
-        {
-            "src": "/about",
-            "dest": "/about.html"
-        },
-        {
-            "src": "/login",
-            "dest": "/login.html"
+            "src": "/(forum|about|login)",
+            "dest": "/$1.html",
+            "headers": {
+                "cache-control": "no-cache, no-store, must-revalidate",
+                "pragma": "no-cache",
+                "expires": "0"
+            }
         },
         {
             "handle": "filesystem"
         },
         {
             "src": "/(.*)",
-            "dest": "/$1"
+            "dest": "/$1",
+            "headers": {
+                "cache-control": "no-cache, no-store, must-revalidate",
+                "pragma": "no-cache",
+                "expires": "0"
+            }
         }
     ],
     "cleanUrls": true,
-    "trailingSlash": false
+    "trailingSlash": false,
+    "github": {
+        "silent": true
+    }
 } 
