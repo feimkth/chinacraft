@@ -449,6 +449,10 @@ textarea:focus {
     position: relative;
     z-index: 31;
     grid-column: span 2;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin-bottom: 2rem;
 }
 
 .trending-list li:nth-child(1) a,
@@ -457,6 +461,9 @@ textarea:focus {
     font-size: 1.4rem;
     font-weight: 700;
     text-align: center;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .trending-list li:nth-child(1) .meta,
@@ -465,6 +472,9 @@ textarea:focus {
     font-weight: 500;
     text-align: center;
     font-size: 1rem;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .trending-list li {
