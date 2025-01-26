@@ -432,7 +432,7 @@ textarea:focus {
 .trending-list {
     list-style: none;
     display: grid !important;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr !important;
     gap: 1.5rem;
     margin: 0;
     padding: 0;
@@ -441,76 +441,94 @@ textarea:focus {
     width: 100%;
 }
 
-.trending-list li:nth-child(1),
-.trending-list li:nth-child(2) {
+.trending-list .featured-term {
     background: #fff8f8;
+<<<<<<< HEAD
+    border: 3px solid var(--color-accent);
+    padding: 1.5rem;
+    position: relative;
+    z-index: 31;
+=======
     border: 2px solid var(--color-accent);
     padding: 1.2rem;
     position: relative;
     z-index: 31;
     grid-column: span 2;
+>>>>>>> e07782c1f7fc0805524a6e9a2ea6834664c2a66a
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     margin-bottom: 2rem;
+<<<<<<< HEAD
+    box-shadow: 0 4px 12px rgba(230, 0, 18, 0.15);
+    transform: scale(1.05);
+    border-radius: 12px;
+=======
+>>>>>>> e07782c1f7fc0805524a6e9a2ea6834664c2a66a
 }
 
-.trending-list li:nth-child(1) a,
-.trending-list li:nth-child(2) a {
+.trending-list .featured-term a {
     color: var(--color-accent);
+<<<<<<< HEAD
+    font-size: 1.8rem;
+=======
     font-size: 1.4rem;
+>>>>>>> e07782c1f7fc0805524a6e9a2ea6834664c2a66a
     font-weight: 700;
     text-align: center;
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+<<<<<<< HEAD
+    margin-bottom: 0.5rem;
+    text-decoration: none;
+=======
+>>>>>>> e07782c1f7fc0805524a6e9a2ea6834664c2a66a
 }
 
-.trending-list li:nth-child(1) .meta,
-.trending-list li:nth-child(2) .meta {
+.trending-list .featured-term .meta {
     color: var(--color-accent);
     font-weight: 500;
     text-align: center;
+<<<<<<< HEAD
+    font-size: 1.2rem;
+=======
     font-size: 1rem;
+>>>>>>> e07782c1f7fc0805524a6e9a2ea6834664c2a66a
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
 }
 
 .trending-list li {
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border-radius: 8px;
     background: var(--color-secondary);
     border: 1px solid var(--color-border);
-    transition: all 0.2s ease;
-    position: relative;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
     display: block !important;
-    opacity: 1 !important;
     visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .trending-list a {
+    color: var(--color-primary);
     font-size: 1.1rem;
     font-weight: 600;
-    color: var(--color-primary);
-    display: block !important;
-    margin-bottom: 0.2rem;
-    transition: color 0.2s ease;
-    line-height: 1.3;
     text-decoration: none;
-    position: relative;
-    opacity: 1 !important;
+    display: block !important;
     visibility: visible !important;
+    opacity: 1 !important;
+    margin-bottom: 0.3rem;
 }
 
 .trending-list .meta {
-    display: block !important;
     color: var(--color-text-light);
     font-size: 0.9rem;
     font-style: italic;
-    opacity: 1 !important;
+    display: block !important;
     visibility: visible !important;
+    opacity: 1 !important;
 }
 
 @media (max-width: 768px) {
