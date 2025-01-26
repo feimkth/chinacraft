@@ -89,5 +89,6 @@
     "trailingSlash": false,
     "github": {
         "silent": true
-    }
+    },
+    "alias": ["www.chinacraft.online", "chinacraft.online"]
 } 
