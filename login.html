@@ -55,7 +55,7 @@
                     <button onclick="handleSignOut()" class="btn btn-secondary">Sign Out</button>
                 </div>
                 <div class="login-buttons">
-                    <a href="/login" class="btn btn-secondary" onclick="trackButton('login')">Log In</a>
+                    <a href="/login" class="btn btn-secondary active">Log In</a>
                 </div>
             </div>
         </div>
@@ -85,6 +85,8 @@
                          data-size="large"
                          data-logo_alignment="left">
                     </div>
+
+                    <div id="login-error" class="error-message" style="display: none; color: red; margin-top: 1rem;"></div>
                 </div>
 
                 <div class="auth-divider">
@@ -109,71 +111,105 @@
         // Check if user is logged in on page load
         window.onload = function() {
             checkUserLogin();
+            
+            // Initialize Google Sign-In
+            google.accounts.id.initialize({
+                client_id: '258958060994-kd7ubs7ovl87ueo7uc4po2ncr4g5dph8.apps.googleusercontent.com',
+                callback: handleGoogleSignIn
+            });
         };
 
         function checkUserLogin() {
-            const user = JSON.parse(localStorage.getItem('user'));
-            if (user) {
-                showUserInfo(user);
+            try {
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (user) {
+                    showUserInfo(user);
+                }
+            } catch (error) {
+                console.error('Error checking login status:', error);
+                showError('Error checking login status. Please try again.');
             }
         }
 
         function showUserInfo(user) {
-            const userInfo = document.querySelector('.user-info');
-            const loginButtons = document.querySelector('.login-buttons');
-            const userName = document.querySelector('.user-name');
-            
-            if (userInfo && loginButtons && userName) {
-                userName.textContent = user.name;
-                userInfo.style.display = 'flex';
-                loginButtons.style.display = 'none';
+            try {
+                const userInfo = document.querySelector('.user-info');
+                const loginButtons = document.querySelector('.login-buttons');
+                const userName = document.querySelector('.user-name');
+                
+                if (userInfo && loginButtons && userName) {
+                    userName.textContent = user.name;
+                    userInfo.style.display = 'flex';
+                    loginButtons.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error showing user info:', error);
+                showError('Error displaying user information. Please try again.');
             }
         }
 
         function handleSignOut() {
-            localStorage.removeItem('user');
-            window.location.href = '/';
+            try {
+                localStorage.removeItem('user');
+                google.accounts.id.disableAutoSelect();
+                window.location.href = '/';
+            } catch (error) {
+                console.error('Error signing out:', error);
+                showError('Error signing out. Please try again.');
+            }
         }
 
         function handleGoogleSignIn(response) {
-            // Decode the JWT token
-            const responsePayload = decodeJwtResponse(response.credential);
-            
-            console.log("ID: " + responsePayload.sub);
-            console.log('Full Name: ' + responsePayload.name);
-            console.log('Given Name: ' + responsePayload.given_name);
-            console.log('Family Name: ' + responsePayload.family_name);
-            console.log("Image URL: " + responsePayload.picture);
-            console.log("Email: " + responsePayload.email);
+            try {
+                if (!response.credential) {
+                    throw new Error('No credential received from Google Sign-In');
+                }
 
-            // Track successful login
-            gtag('event', 'login_success', {
-                'method': 'google'
-            });
+                // Decode the JWT token
+                const responsePayload = decodeJwtResponse(response.credential);
+                
+                // Track successful login
+                gtag('event', 'login_success', {
+                    'method': 'google'
+                });
 
-            // Store user info in localStorage
-            const user = {
-                id: responsePayload.sub,
-                name: responsePayload.name,
-                email: responsePayload.email,
-                picture: responsePayload.picture
-            };
-            localStorage.setItem('user', JSON.stringify(user));
+                // Store user info in localStorage
+                const user = {
+                    id: responsePayload.sub,
+                    name: responsePayload.name,
+                    email: responsePayload.email,
+                    picture: responsePayload.picture
+                };
+                localStorage.setItem('user', JSON.stringify(user));
 
-            // Show success message
-            alert('Successfully signed in! Welcome ' + responsePayload.name);
-
-            // Redirect to home page
-            window.location.href = '/';
+                // Redirect to home page
+                window.location.href = '/';
+            } catch (error) {
+                console.error('Error during Google Sign-In:', error);
+                showError('Error signing in with Google. Please try again.');
+            }
         }
 
         function decodeJwtResponse(token) {
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-            return JSON.parse(jsonPayload);
+            try {
+                const base64Url = token.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+                return JSON.parse(jsonPayload);
+            } catch (error) {
+                console.error('Error decoding JWT:', error);
+                throw new Error('Invalid token format');
+            }
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('login-error');
+            if (errorDiv) {
+                errorDiv.textContent = message;
+                errorDiv.style.display = 'block';
+            }
         }
     </script>
 </body>
