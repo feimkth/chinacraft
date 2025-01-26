@@ -19,6 +19,24 @@
             }
         },
         {
+            "src": "/index.html",
+            "headers": {
+                "cache-control": "no-cache, no-store, must-revalidate",
+                "pragma": "no-cache",
+                "expires": "0",
+                "x-frame-options": "DENY",
+                "x-content-type-options": "nosniff"
+            }
+        },
+        {
+            "src": "/styles/(.*)",
+            "headers": {
+                "cache-control": "no-cache, no-store, must-revalidate",
+                "pragma": "no-cache",
+                "expires": "0"
+            }
+        },
+        {
             "src": "/trending-words/chun-jie",
             "dest": "/trending-words/chun-jie.html",
             "headers": {
